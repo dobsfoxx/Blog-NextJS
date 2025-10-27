@@ -1,0 +1,13 @@
+{
+    "code-runner.clearPreviousOutput": true,
+    "code-runner.runInTerminal": true,
+    "code-runner.executorMap": {
+        "typescript": "npx tsx",
+        "typescriptreact": "npx tsx"
+    }
+    ,
+    "code-runner.executorMapByFileExtension": {
+        ".ts": "npx tsx",
+        ".tsx": "npx tsx"
+    }
+}
