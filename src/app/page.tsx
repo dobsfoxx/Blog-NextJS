@@ -2,26 +2,59 @@ import clsx from "clsx";
 import SpinLoader from "../components/SpinLoader";
 import { Suspense } from "react";
 import PostsList from "../components/PostsList";
+import Container from "../components/container";
+import Header from "../components/Header";
+import PostHeading from "../components/PostHeading/inde";
+import PostCoverImage from "../components/PostCoverImage";
 
 export default async function HomePage() {
-
   return (
-    <main className="text-slate-900 bg-slate-100 min-h-screen">
-      <header>
-        <h1 className={clsx("text-6xl", "font-bold", "text-gray-800", "text-center", "py-8")}>
-          Blog Posts
-        </h1>
-      </header>
+    <Container>
+      <Header />
+      <section className="grid grid-cols-1 gap-8 mb-16 sm:grid-cols-2  group">
+        <PostCoverImage
+          linkProps={{ href: "#" }}
+          imageProps={{
+            src: "/images/bryen_9.png",
+            width: 1200,
+            height: 720,
+            alt: "Cover Image",
+            priority: true,
+          }} />
 
-      <Suspense fallback={<SpinLoader className="my-20"/>}>
+        <div className="flex flex-col  sm:justify-center">
+          <time
+            dateTime="2025-04-20T10:00"
+            className="text-slate-600  block text-sm"
+          >
+            20/04/2025 10:00
+          </time>
+
+         <PostHeading url="#" as="h1" />
+
+          <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rerum
+            pariatur perferendis nostrum nulla quidem neque aspernatur. Cum eius
+            cupiditate ab esse tempore, corporis veniam consectetur similique
+            facilis? Praesentium, ipsam consequuntur.
+          </p>
+        </div>
+      </section>
+      <Suspense fallback={<SpinLoader className="my-20" />}>
         <PostsList />
       </Suspense>
-
       <footer>
-        <p className={clsx("text-center", "py-4", "text-center", "font-bold")}>
-          &copy; {new Date().getFullYear()} My Blog
+        <p
+          className={clsx(
+            "text-center",
+            "py-4",
+            "text-center",
+            "font-extrabold text-4xl"
+          )}
+        >
+          My Blog &copy; 2024
         </p>
       </footer>
-    </main>
+    </Container>
   );
 }

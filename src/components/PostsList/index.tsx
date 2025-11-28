@@ -10,7 +10,7 @@ export default async function LoadingPage() {
                 return (
 
                   <article key={post.id}>
-                    <h2 className={clsx("text-xl", "font-bold", "text-orange-400")}>
+                    <h2 className={clsx( "font-bold", "text-slate-900")}>
                       {post.title}
                     </h2>
 
