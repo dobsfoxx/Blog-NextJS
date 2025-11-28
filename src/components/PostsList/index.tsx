@@ -1,22 +1,48 @@
 import { postRepository } from "@/src/repositories/post/json-post-repository";
-import { clsx } from "clsx";
+import PostCoverImage from "../PostCoverImage";
+import PostHeading from "../PostHeading";
 
 export default async function LoadingPage() {
   const posts = await postRepository.findAll();
 
   return (
-    <main>
-      {posts.map(post =>{
-                return (
+    <div className="grid grid-cols-1 gap-8 mb-16 sm:grid-cols-2 lg:grid-cols-3 ">
+     {/* Layout principal para a lista de posts */}
+     {posts.map((post) => {
 
-                  <article key={post.id}>
-                    <h2 className={clsx( "font-bold", "text-slate-900")}>
-                      {post.title}
-                    </h2>
+       const postLink = `/post/${post.slug}`;  {/* Link para a página do post via slug via postModel */}
 
-                  </article>
-                );
+        return (
+          <div key={post.id} className="flex flex-col group gap-4">
+            {/* Componente de imagem do post */}
+            <PostCoverImage
+              linkProps={{ href: postLink }}
+              imageProps={{
+                src: post.coverImageUrl,
+                width: 1200,
+                height: 720,
+                alt: post.title,
+                priority: true,
+              }}
+            />
+            <div className="flex flex-col  sm:justify-center">
+              <time
+                dateTime={post.createdAt}
+                className="text-slate-600  block text-sm"
+              >
+                20/04/2025 10:00
+              </time>
+
+              <PostHeading url={postLink} as="h2">
+                {/* Componente de titulos do post*/ }
+                {post.title}
+              </PostHeading>
+
+              <p>{post.excerpt}</p> {/* Resumo do post via postmodel */ }
+            </div>
+          </div>
+        );
       })}
-    </main>
+    </div>
   );
 }
