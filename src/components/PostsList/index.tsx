@@ -1,15 +1,15 @@
-import { postRepository } from "@/src/repositories/post/json-post-repository";
 import PostCoverImage from "../PostCoverImage";
 import PostSummary from "../PostSummary";
+import { findAllPublicPosts } from "@/src/lib/post/queries";
 
 export default async function LoadingPage() {
-  const posts = await postRepository.findAll();
+  const posts = await findAllPublicPosts();
 
   return (
     <div className="grid grid-cols-1 gap-8 mb-16 sm:grid-cols-2 lg:grid-cols-3 ">
      {/* Layout principal para a lista de posts */}
-     {posts.map((post) => {
-
+     {posts.slice(1).map((post) => {
+      {/* Ignora o primeiro post (destaque) */}
        const postLink = `/post/${post.slug}`;  {/* Link para a página do post via slug via postModel */}
 
         return (

@@ -19,14 +19,13 @@ export class JsonPostRepository implements PostRepository {
     const { posts } = parsedJson; //extrai a propriedade posts do objeto analisado
     return posts;
   }
-  async findAll(): Promise<PostModel[]> {
-    await this.simulateWait();
+  async findAllPublic(): Promise<PostModel[]> {
     const posts = await this.readFromDisk(); //lê os posts do disco
-    return posts;
+    return posts.filter(post => post.published); //retorna apenas os posts públicados
   }
   async findById(id: string): Promise<PostModel> {
     await this.simulateWait();
-    const posts = await this.findAll();
+    const posts = await this.findAllPublic();
     const post = posts.find(post => post.id === id); //procura o post com o ID correspondente
     if (!post) {
       throw new Error(`Post with id ${id} not found`);
@@ -39,7 +38,7 @@ export class JsonPostRepository implements PostRepository {
 export const postRepository : PostRepository = new JsonPostRepository();  //instância do repositório de posts
 
 (async () => {
-  const posts = await postRepository.findAll();
+  const posts = await postRepository.findAllPublic();
   posts.forEach(post=>{
     console.log(post.title);
   })
