@@ -9,11 +9,15 @@ import PostFeatured from "../components/PostFeatured";
 export default async function HomePage() {
   return (
     <Container>
+
       <Header />
-      <PostFeatured />
-      <Suspense fallback={<SpinLoader className="my-20" />}>
+
+      <PostFeatured /> {/* Componente do post em destaque na página principal */}
+
+      <Suspense fallback={<SpinLoader className="my-20" />}> {/* Suspense para carregamento assíncrono via NextJS importando o componenteSpinLoader*/}
         <PostsList />
       </Suspense>
+
       <footer>
         <p
           className={clsx(
@@ -26,6 +30,7 @@ export default async function HomePage() {
           My Blog &copy; 2024
         </p>
       </footer>
+
     </Container>
   );
 }
