@@ -1,6 +1,6 @@
 import { postRepository } from "@/src/repositories/post/json-post-repository";
 import PostCoverImage from "../PostCoverImage";
-import PostHeading from "../PostHeading";
+import PostSummary from "../PostSummary";
 
 export default async function LoadingPage() {
   const posts = await postRepository.findAll();
@@ -25,21 +25,14 @@ export default async function LoadingPage() {
                 priority: true,
               }}
             />
-            <div className="flex flex-col  sm:justify-center">
-              <time
-                dateTime={post.createdAt}
-                className="text-slate-600  block text-sm"
-              >
-                20/04/2025 10:00
-              </time>
-
-              <PostHeading url={postLink} as="h2">
-                {/* Componente de titulos do post*/ }
-                {post.title}
-              </PostHeading>
-
-              <p>{post.excerpt}</p> {/* Resumo do post via postmodel */ }
-            </div>
+            {/* Componente de resumo do post */}
+            <PostSummary
+              postHeading="h2"
+              postLink={postLink}
+              createdAt={post.createdAt}
+              title={post.title}
+              excerpt={post.excerpt}
+            />
           </div>
         );
       })}
