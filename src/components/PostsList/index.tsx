@@ -6,7 +6,7 @@ export default async function LoadingPage() {
   const posts = await findAllPublicPosts();
 
   return (
-    <div className="grid grid-cols-1 gap-8 mb-16 sm:grid-cols-2 lg:grid-cols-3 ">
+    <div className="grid grid-cols-1 gap-8 pb-8 sm:grid-cols-2 lg:grid-cols-3 ">
      {/* Layout principal para a lista de posts */}
      {posts.slice(1).map((post) => {
       {/* Ignora o primeiro post (destaque) */}
