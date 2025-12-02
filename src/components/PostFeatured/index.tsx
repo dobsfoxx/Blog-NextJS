@@ -1,10 +1,10 @@
 import PostCoverImage from "../PostCoverImage";
 import PostSummary from "../PostSummary";
-import { findAllPublicPosts } from "@/src/lib/post/queries";
+import { findAllPublicPostsCached } from "@/src/lib/post/queries";
 
 export default async function PostFeatured() {
 
-  const posts = await findAllPublicPosts();
+  const posts = await findAllPublicPostsCached();
   const post = posts[0]; // Pega o primeiro post como destaque para demonstração
   const postLink = `/post/${post.slug}`;
 

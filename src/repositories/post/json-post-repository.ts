@@ -28,7 +28,19 @@ export class JsonPostRepository implements PostRepository {
     const posts = await this.findAllPublic();
     const post = posts.find(post => post.id === id); //procura o post com o ID correspondente
     if (!post) {
-      throw new Error(`Post with id ${id} not found`);
+      throw new Error(`Post com ${id} não encontrado`);
+
+    }
+
+    return post;
+  }
+
+  async findBySlug(slug: string): Promise<PostModel> {
+    await this.simulateWait();
+    const posts = await this.findAllPublic();
+    const post = posts.find(post => post.slug === slug); //procura o post com o slug correspondente
+    if (!post) {
+      throw new Error(`Post com ${slug} não encontrado`);
 
     }
 

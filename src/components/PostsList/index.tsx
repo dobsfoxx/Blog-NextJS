@@ -1,9 +1,9 @@
 import PostCoverImage from "../PostCoverImage";
 import PostSummary from "../PostSummary";
-import { findAllPublicPosts } from "@/src/lib/post/queries";
+import { findAllPublicPostsCached } from "@/src/lib/post/queries";
 
 export default async function LoadingPage() {
-  const posts = await findAllPublicPosts();
+  const posts = await findAllPublicPostsCached();
 
   return (
     <div className="grid grid-cols-1 gap-8 pb-8 sm:grid-cols-2 lg:grid-cols-3 ">
