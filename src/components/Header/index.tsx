@@ -12,7 +12,7 @@ export default function Header() {
           "lg:text-7xl/normal lg:py-12"
         )}
       >
-        <Link href="#">TSWind Blog</Link>{/*Título da página principal */}
+        <Link href="/">TSWind Blog</Link>{/*Título da página principal */}
       </h1>
     </header>
   );
