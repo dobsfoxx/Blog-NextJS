@@ -1,6 +1,8 @@
 import { findPostBySlugCached } from "@/src/lib/post/queries";
-import { Suspense } from "react";
-import SpinLoader from "../SpinLoader";
+import Image from "next/image";
+import PostHeading from "../PostHeading";
+import { PostDate } from "../PostDate";
+import { SafeMarkdown } from "../SafeMarkdown/inde";
 
 type SinglePostProps = {
   slug: string;
@@ -13,9 +15,22 @@ export default async function SinglePost({ slug }: SinglePostProps) {
 
   return (
 
-    <Suspense fallback={<SpinLoader className="min-h-20 mb-16"/>}>
-      {post.content}
-    </Suspense>
+    <article className="flex flex-col gap-4 mb-16">
+      <Image
+        src={post.coverImageUrl}
+        alt={post.title}
+        width={1200}
+        height={720}
+        className="rounded-xl mb-4"
+      />
+      <PostHeading url={`/post/${post.slug}`} >{post.title}</PostHeading>
+      <p>{post.author} | <PostDate dateTime={post.createdAt} /></p>
+
+       <SafeMarkdown markdown={post.content} />
+
+
+    </article>
+
 
   )
 }
