@@ -9,6 +9,8 @@ type PostSlugPageProps = {
 };
 export async function generateMetadata({ params }: PostSlugPageProps): Promise<Metadata> {
 
+  throw new Error("Erro na Slug");
+
   const { slug } = await params;
   const post = await findPostBySlugCached(slug);
 
@@ -23,11 +25,10 @@ export default async function PostSlugPage({ params }: PostSlugPageProps) {
 
   const { slug } = await params; //Aguarda a resolução da Promise params e desestrutura o valor de slug do objeto resultante
 
-  const post = await findPostBySlugCached(slug); //Chama a função findPostBySlugCached com o slug obtido
 
   return (
 
-    <Suspense fallback={<SpinLoader className="min-h-20 mb-16"/>}>
+    <Suspense fallback={<SpinLoader className="min-h-20 "/>}>
       <SinglePost slug={slug} />
     </Suspense>
 );
